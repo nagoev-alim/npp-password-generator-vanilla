@@ -1,0 +1,155 @@
+@import "assets/scss/config/fonts";
+@import "assets/scss/config/reset";
+@import "assets/scss/config/vars";
+@import "assets/scss/config/utility";
+@import "assets/scss/modules/typography";
+@import "assets/scss/modules/fields";
+@import "assets/scss/modules/buttons";
+@import "assets/scss/modules/toast";
+@import "assets/scss/config/global";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+.app-author {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-container {
+  --gap: 15px;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background-color: var(--bcs-grey-4);
+  padding: 10px;
+}
+
+.password-generator {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05), 0 25px 35px rgba(0, 0, 0, 0.03);
+  max-width: 500px;
+  width: 100%;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  display: grid;
+  gap: var(--gap);
+
+  .result {
+    position: relative;
+
+    input {
+      font-size: calc(20px + (30 - 20) * ((100vw - 300px) / (var(--maximumViewportWidth) - 300)));
+      overflow: auto;
+      padding-right: 35px;
+      pointer-events: none;
+      width: 100%;
+      color: var(--bcp-grey);
+      font-weight: var(--fw-500);
+    }
+
+    .clipboard {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 4px;
+      border: none;
+      background-color: transparent;
+
+      svg {
+        pointer-events: none;
+      }
+    }
+  }
+
+  .indicator {
+    position: relative;
+    height: 8px;
+    background-color: var(--bcs-grey-2);
+    border-radius: 4px;
+    overflow: hidden;
+
+    &::after {
+      transition: width 0.25s linear;
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      content: '';
+      left: 0;
+    }
+
+    &[data-level='weak']::after {
+      width: 20%;
+      background-color: #E64A4A;
+    }
+
+    &[data-level='medium']::after {
+      width: 50%;
+      background-color: #f1c80b;
+    }
+
+    &[data-level='strong']::after {
+      width: 100%;
+      background-color: #9dd0c4;
+    }
+  }
+
+  .length {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--gap);
+
+    &__range {
+      all: revert;
+      width: 100%;
+      cursor: pointer;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 8px;
+      border-radius: 4px;
+      background: var(--bcs-grey-2);
+      outline: none;
+      opacity: 0.7;
+      transition: opacity .2s;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 15px;
+        height: 15px;
+        background-color: var(--bcp-grey);
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      &::-moz-range-thumb {
+        width: 15px;
+        height: 15px;
+        background-color: var(--bcp-grey);
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .options {
+    display: grid;
+    gap: var(--gap);
+
+    @media (min-width: 576px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    label {
+      display: flex;
+    }
+  }
+}
